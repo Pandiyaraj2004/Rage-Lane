@@ -1,5 +1,7 @@
-export const SIZE=3200, DURATION=480;
-export const TUNING={carSpeed:350,nitroSpeed:560,footSpeed:180,carAcceleration:900,footAcceleration:1400,braking:1500,carTurn:3.6,footTurn:5.5,bulletSpeed:900,rocketSpeed:620} as const;
+export const SIZE=3200, DURATION=480, MIN_MINUTES=1, MAX_MINUTES=20, DEFAULT_MINUTES=DURATION/60;
+/** Whole minutes in [MIN_MINUTES, MAX_MINUTES]; anything invalid becomes the default. */
+export const matchMinutes=(n:unknown)=>{const m=Math.round(Number(n));return Number.isFinite(m)?Math.min(MAX_MINUTES,Math.max(MIN_MINUTES,m)):DEFAULT_MINUTES};
+export const TUNING={carSpeed:270,nitroSpeed:420,footSpeed:125,carAcceleration:650,footAcceleration:900,braking:1500,carTurn:3.6,footTurn:5.5,bulletSpeed:900,rocketSpeed:620} as const;
 export type Input={up:boolean;down:boolean;left:boolean;right:boolean;drift:boolean;nitro:boolean;fire:boolean;aim:number;weapon:number;enter:boolean};
 export const idle=():Input=>({up:false,down:false,left:false,right:false,drift:false,nitro:false,fire:false,aim:0,weapon:0,enter:false});
 export type Player={id:string;name:string;x:number;y:number;angle:number;speed:number;hp:number;carHp:number;car:boolean;nitro:number;ammo:number;loot:number;kills:number;score:number;bot:boolean;cool:number;enterCool:number;respawn:number;color:number;weaponCooldowns?:number[]};
@@ -12,7 +14,7 @@ export const distanceSquared=(a:{x:number;y:number},b:{x:number;y:number})=>(a.x
 export const score=(p:Player)=>p.loot*1000+p.kills*250;
 export class Simulation{
  state:State={players:[],bullets:[],items:[],time:DURATION,ended:false,events:[],tick:0}; seq=0;pickupElapsed=0;
- constructor(){for(let i=0;i<5;i++)this.item('treasure',100+(i*3%8)*400,100+(i*5%8)*400);for(let i=0;i<32;i++)this.item((['health','ammo','repair','car'] as const)[i%4],70+(i%8)*400,70+Math.floor(i/8)*800);}
+ constructor(minutes:number=DEFAULT_MINUTES){this.state.time=matchMinutes(minutes)*60;for(let i=0;i<5;i++)this.item('treasure',100+(i*3%8)*400,100+(i*5%8)*400);for(let i=0;i<32;i++)this.item((['health','ammo','repair','car'] as const)[i%4],70+(i%8)*400,70+Math.floor(i/8)*800);}
  item(kind:Item['kind'],x:number,y:number){this.state.items.push({id:++this.seq,kind,x,y,active:true})}
  add(id:string,name:string,bot=false){const i=this.state.players.length;const p:Player={id,name:name.slice(0,18),x:80+(i%4)*800,y:480+Math.floor(i/4)*1600,angle:0,speed:0,hp:100,carHp:150,car:true,nitro:100,ammo:120,loot:0,kills:0,score:0,bot,cool:0,enterCool:0,respawn:0,color:[0x57f5d1,0xff537e,0xffc857,0x9d7bff,0x5fb8ff,0xff934f,0xf97fff,0xb4f870][i%8]};this.state.players.push(p);return p}
  event(s:string){this.state.events=[s,...this.state.events].slice(0,5)}

@@ -31,7 +31,7 @@ Matches last eight minutes. Score = held treasures × 1,000 + eliminations × 25
 
 ## Performance and tuning
 
-Normal vehicle speed is 350 units/s, nitro is 560, and on-foot speed is 180. Acceleration is 900 units/s² (vehicle) and 1400 (on foot), braking is 1500. Guns fire 900 units/s and rockets 620. Tuning lives in `shared/game.ts`. Both server and solo simulate at 60 Hz, network snapshots at 30 Hz, with interpolated remote rendering. Static city art is cached in 800px tiles; rendering skips off-screen effects. Emoji textures are created once, and the React minimap terrain is memoized. The engine is loaded separately from the homepage.
+Normal vehicle speed is 270 units/s, nitro is 420, and on-foot speed is 125. Acceleration is 650 units/s² (vehicle) and 900 (on foot), braking is 1500. Guns fire 900 units/s and rockets 620. Tuning lives in `shared/game.ts`. Both server and solo simulate at 60 Hz, network snapshots at 30 Hz, with interpolated remote rendering. Static city art is cached in 800px tiles; rendering skips off-screen effects. Emoji textures are created once, and the React minimap terrain is memoized. The engine is loaded separately from the homepage.
 
 Treasure icons pulse on both the world and district map. Tap the minimap or press M for the full map; it displays glowing diamond caches and labeled locations.
 
