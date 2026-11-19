@@ -12,6 +12,7 @@ app.use(express.static('dist'));
 type Room={code:string;sim:Simulation;inputs:Record<string,Input>;lastInput:Record<string,number>;ready:Set<string>;started:boolean;host:string;public:boolean};
 const rooms=new Map<string,Room>();
 function lobby(r:Room){io.to(r.code).emit('lobby',{code:r.code,host:r.host,public:r.public,players:r.sim.state.players.filter(p=>!p.bot).map(p=>({id:p.id,name:p.name,ready:r.ready.has(p.id)}))})}
+function cleanName(name:unknown){if(typeof name!=='string')return 'Guest';const n=name.replace(/[\p{C}]/gu,'').replace(/\s+/g,' ').trim().slice(0,18);return n||'Guest'}
 io.on('connection',socket=>{
  let room:Room|undefined;
  socket.on('join',(raw:unknown,reply:unknown)=>{
@@ -25,7 +26,7 @@ io.on('connection',socket=>{
   if(match===true&&!code)r=Array.from(rooms.values()).find(r=>r.public&&!r.started&&r.sim.state.players.length<8);
   if(r&&(r.started||r.sim.state.players.length>=8))return ack({error:'Room full or match in progress'});
   if(!r){let c:string;do{c=randomBytes(3).toString('hex').toUpperCase()}while(rooms.has(c));r={code:c,sim:new Simulation(),inputs:{},lastInput:{},ready:new Set(),started:false,host:socket.id,public:match===true};rooms.set(c,r)}
-  room=r;r.sim.add(socket.id,typeof name==='string'?name.trim()||'Guest':'Guest');socket.join(r.code);ack({code:r.code,id:socket.id});lobby(r);
+  room=r;r.sim.add(socket.id,cleanName(name));socket.join(r.code);ack({code:r.code,id:socket.id});lobby(r);
  });
  socket.on('ready',()=>{if(!room||room.started)return;room.ready.has(socket.id)?room.ready.delete(socket.id):room.ready.add(socket.id);lobby(room)});
  socket.on('start',()=>{

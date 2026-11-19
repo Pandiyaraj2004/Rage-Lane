@@ -28,3 +28,28 @@
 .brand,.hero h1,.lobby h1,.modal h2,.eyebrow,.edition,.art-label,.timer,.roomcode,.respawn{font-family:'Urban Thunder',Impact,'Arial Black',sans-serif}
 .brand small,.timer small{font-family:Arial,Helvetica,sans-serif}
 .num{font-family:Impact,'Arial Black',Arial,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+/* Phone landscape: keep HUD in the top band, leave the control columns and road clear. Controls are untouched. */
+.respawn{pointer-events:none}
+@media(max-height:500px) and (orientation:landscape){
+.hud.top{top:8px;left:8px;right:8px;justify-content:flex-end}
+.top .brand{display:none}
+.top .timer{position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:18px;padding:4px 14px;border-radius:10px;line-height:1.1}
+.top .timer small{font-size:6px;letter-spacing:1px}
+.top button{font-size:9px;padding:7px 11px}
+.left.compact-hud{top:8px;bottom:auto;left:8px;width:min(210px,30vw);padding:6px 8px;border-radius:9px}
+.compact-status{font-size:8px;gap:6px}
+.compact-status b{margin-left:6px}
+.left.compact-hud .vitals{gap:6px;margin:5px 0}
+.compact-hud .vitals label{font-size:7px}
+.compact-hud meter{height:3px;margin-top:2px}
+.compact-weapon .touch-weapon-name{display:none}
+.compact-weapon>span{font-size:7px;max-width:100%}
+.minimap:not(.expanded){top:44px;bottom:auto;right:8px;width:72px;padding:4px;border-radius:9px}
+.minimap:not(.expanded) small{display:none}
+.minimap:not(.expanded) svg{border-radius:5px}
+.feed{display:block;top:46px;left:50%;transform:translateX(-50%);max-width:36vw}
+.feed p{font-size:8px;padding:3px 8px}
+.respawn{top:30%;left:50%;width:auto;max-width:46vw;transform:translateX(-50%);font-size:clamp(20px,5vw,30px);padding:8px 16px;background:#08121ccc;border-radius:12px;white-space:nowrap}
+.respawn small{font-size:10px;margin:4px 0 0}
+}
