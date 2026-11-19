@@ -27,6 +27,8 @@ const P = {
   map: <path d="m3 6 6-2.5 6 2.5 6-2.5v14.5L15 20.5l-6-2.5-6 2.5zM9 3.5V18M15 6v14.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>,
   close: <path d="M5 5l14 14M19 5 5 19" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round"/>,
   skull: <><path d="M12 2.5c-5 0-8.5 3.4-8.5 8 0 2.6 1.2 4.4 3 5.5V20h11v-4c1.8-1.1 3-2.9 3-5.5 0-4.6-3.5-8-8.5-8z" fill="currentColor"/><circle cx="8.8" cy="11" r="2.2" fill="#0b1220"/><circle cx="15.2" cy="11" r="2.2" fill="#0b1220"/></>,
+  expand: <path d="M3.5 9V3.5H9M15 3.5h5.5V9M20.5 15v5.5H15M9 20.5H3.5V15" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>,
+  shrink: <path d="M9 3.5V9H3.5M20.5 9H15V3.5M15 20.5V15h5.5M3.5 15H9v5.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>,
   timer: <><circle cx="12" cy="13.5" r="8" fill="none" stroke="currentColor" strokeWidth="2"/><path d="M12 9v4.5l3 2M9.5 2.5h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></>,
 } satisfies Record<string, ReactNode>;
 

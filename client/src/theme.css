@@ -347,3 +347,11 @@ meter[aria-label="Nitro"]::-moz-meter-bar { background: linear-gradient(90deg, #
   .compact-weapon .touch-weapon-name { display: none; }
   meter { height: 3px; }
 }
+
+/* ------------------------------------------------------------------ full screen button */
+.top-actions { display: flex; gap: 8px; align-items: center; pointer-events: auto; }
+.top button.fs-btn .icon { color: var(--cyan); filter: drop-shadow(0 0 5px rgba(46, 242, 255, .7)); }
+header .fs-head { margin-left: auto; }
+header .fs-head + .settings-btn { margin-left: 10px; }
+header .fs-head .icon { color: var(--cyan); }
+@media (max-width: 800px) { header .fs-head .fs-label { display: none; } header .fs-head .icon { margin: 0; } }
