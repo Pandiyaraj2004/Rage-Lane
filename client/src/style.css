@@ -27,3 +27,4 @@
 /* Display font supplied with the project: reserve it for branding and quick-scan game callouts. */
 .brand,.hero h1,.lobby h1,.modal h2,.eyebrow,.edition,.art-label,.timer,.roomcode,.respawn{font-family:'Urban Thunder',Impact,'Arial Black',sans-serif}
 .brand small,.timer small{font-family:Arial,Helvetica,sans-serif}
+.num{font-family:Impact,'Arial Black',Arial,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.02em}
