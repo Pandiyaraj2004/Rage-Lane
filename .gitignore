@@ -4,3 +4,6 @@ dist/
 *.log
 .npm-cache/
 _font_inspect/
+
+.vercel
+.env*
