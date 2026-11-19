@@ -355,3 +355,7 @@ header .fs-head { margin-left: auto; }
 header .fs-head + .settings-btn { margin-left: 10px; }
 header .fs-head .icon { color: var(--cyan); }
 @media (max-width: 800px) { header .fs-head .fs-label { display: none; } header .fs-head .icon { margin: 0; } }
+
+/* ------------------------------------------------------------------ music settings */
+.lobbyrow.music-volume input[type=range] { width: min(220px, 45%); margin: 0; padding: 0; accent-color: var(--cyan); }
+.lobbyrow.music-volume input[type=range]:disabled { opacity: .4; }
